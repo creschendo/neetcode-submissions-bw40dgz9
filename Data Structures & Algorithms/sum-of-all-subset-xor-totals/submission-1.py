@@ -1,0 +1,30 @@
+class Solution:
+    def subsetXORSum(self, nums: List[int]) -> int:
+        res = 0
+
+        def backtrack(i, subset):
+            nonlocal res
+            xorr = 0
+            for num in subset:
+                xorr ^= num
+            res += xorr
+
+            for j in range(i, len(nums)):
+                subset.append(nums[j])
+                print(i)
+                print(subset)
+                backtrack(j + 1, subset)
+                subset.pop()
+
+        backtrack(0, [])
+        return res
+
+
+        """
+        class Solution:
+    def subsetXORSum(self, nums: List[int]) -> int:
+        res = 0
+        for num in nums:
+            res |= num
+        return res << (len(nums) - 1)
+        """
